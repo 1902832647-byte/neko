@@ -11,16 +11,13 @@
     --cream: #fdf6ec;
     --pink: #f2a7c3;
     --pink-dark: #e8789f;
-    --pink-light: #fde8f0;
     --lavender: #c9b8e8;
     --mint: #b8e8d4;
-    --yellow: #fdeaa8;
-    --brown: #8b6355;
     --dark: #2d2340;
-    --shadow: rgba(200, 150, 180, 0.25);
+    --shadow: rgba(200,150,180,0.25);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
     font-family: 'Nunito', sans-serif;
@@ -32,662 +29,453 @@
     padding: 20px;
     background-image:
       radial-gradient(circle at 20% 20%, rgba(242,167,195,0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(201,184,232,0.15) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(184,232,212,0.1) 0%, transparent 60%);
+      radial-gradient(circle at 80% 80%, rgba(201,184,232,0.15) 0%, transparent 50%);
     overflow-x: hidden;
   }
 
-  /* floating deco */
-  .deco { position: fixed; pointer-events: none; font-size: 1.2rem; opacity: 0.3; animation: floatDeco 6s ease-in-out infinite; }
-  .deco:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; }
-  .deco:nth-child(2) { top: 15%; right: 8%; animation-delay: 1.5s; }
-  .deco:nth-child(3) { bottom: 20%; left: 3%; animation-delay: 3s; }
-  .deco:nth-child(4) { bottom: 10%; right: 5%; animation-delay: 4.5s; }
-  .deco:nth-child(5) { top: 50%; left: 2%; animation-delay: 2s; }
-  @keyframes floatDeco { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-15px) rotate(10deg)} }
+  .deco { position:fixed; pointer-events:none; font-size:1.2rem; opacity:0.25; animation:floatDeco 6s ease-in-out infinite; }
+  .deco:nth-child(1){top:5%;left:5%;animation-delay:0s}
+  .deco:nth-child(2){top:15%;right:8%;animation-delay:1.5s}
+  .deco:nth-child(3){bottom:20%;left:3%;animation-delay:3s}
+  .deco:nth-child(4){bottom:10%;right:5%;animation-delay:4.5s}
+  @keyframes floatDeco{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
-  h1 {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: var(--dark);
-    margin-bottom: 4px;
-    letter-spacing: -0.5px;
-  }
-  .subtitle {
-    font-size: 0.85rem;
-    color: var(--pink-dark);
-    font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: 0.5px;
-  }
+  h1 { font-size:1.8rem; font-weight:900; color:var(--dark); margin-bottom:2px; letter-spacing:-0.5px; }
+  .subtitle { font-size:0.82rem; color:var(--pink-dark); font-weight:700; margin-bottom:16px; letter-spacing:0.5px; }
 
-  /* Status bar */
-  .status-bar {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  .status-bar { display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; justify-content:center; }
   .stat {
-    background: white;
-    border-radius: 20px;
-    padding: 6px 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 2px 10px var(--shadow);
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--dark);
+    background:white; border-radius:20px; padding:6px 14px;
+    display:flex; align-items:center; gap:6px;
+    box-shadow:0 2px 10px var(--shadow); font-size:0.78rem; font-weight:700; color:var(--dark);
   }
-  .stat-icon { font-size: 1rem; }
-  .stat-bar-wrap {
-    width: 60px; height: 8px;
-    background: #f0e6f0;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .stat-bar {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.5s ease;
-  }
-  .bar-happy { background: linear-gradient(90deg, #f2a7c3, #e8789f); }
-  .bar-hungry { background: linear-gradient(90deg, #fdeaa8, #f5c842); }
-  .bar-clean { background: linear-gradient(90deg, #b8e8d4, #5ecfa0); }
-  .bar-energy { background: linear-gradient(90deg, #c9b8e8, #9b7fd4); }
+  .stat-bar-wrap { width:55px; height:7px; background:#f0e6f0; border-radius:4px; overflow:hidden; }
+  .stat-bar { height:100%; border-radius:4px; transition:width 0.5s ease; }
+  .bar-happy  { background: linear-gradient(90deg,#f2a7c3,#e8789f); }
+  .bar-hungry { background: linear-gradient(90deg,#fdeaa8,#f5c842); }
+  .bar-clean  { background: linear-gradient(90deg,#b8e8d4,#5ecfa0); }
+  .bar-energy { background: linear-gradient(90deg,#c9b8e8,#9b7fd4); }
 
-  /* Main game area */
   .game-world {
-    width: 100%;
-    max-width: 480px;
-    background: white;
-    border-radius: 28px;
-    padding: 16px;
-    box-shadow: 0 8px 40px var(--shadow), 0 0 0 3px rgba(242,167,195,0.3);
-    margin-bottom: 16px;
-    position: relative;
+    width:100%; max-width:480px; background:white; border-radius:28px; padding:16px;
+    box-shadow:0 8px 40px var(--shadow), 0 0 0 3px rgba(242,167,195,0.3);
+    margin-bottom:14px;
   }
-
-  .room-label {
-    font-size: 0.7rem;
-    font-weight: 800;
-    color: var(--pink-dark);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-align: center;
-    margin-bottom: 8px;
-  }
+  .room-label { font-size:0.7rem; font-weight:800; color:var(--pink-dark); text-transform:uppercase; letter-spacing:2px; text-align:center; margin-bottom:8px; }
 
   #cat-arena {
-    width: 100%;
-    height: 220px;
-    background: linear-gradient(180deg, #fce8f5 0%, #fdf0f8 60%, #f5e8e0 100%);
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    border: 2px solid rgba(242,167,195,0.4);
+    width:100%; height:220px;
+    background:linear-gradient(180deg,#fce8f5 0%,#fdf0f8 65%,#f8e8e0 100%);
+    border-radius:20px; position:relative; overflow:hidden; cursor:pointer;
+    border:2px solid rgba(242,167,195,0.35);
   }
-
-  /* floor */
   #cat-arena::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 30px;
-    background: linear-gradient(180deg, transparent, rgba(232,180,210,0.2));
-    border-radius: 0 0 18px 18px;
+    content:''; position:absolute; bottom:0; left:0; right:0; height:28px;
+    background:linear-gradient(180deg,transparent,rgba(232,180,210,0.18));
+    border-radius:0 0 18px 18px; pointer-events:none;
   }
+  .arena-deco { position:absolute; font-size:1.3rem; pointer-events:none; opacity:0.5; }
 
-  /* pixel decorations inside arena */
-  .arena-deco {
-    position: absolute;
-    font-size: 1.2rem;
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
-  /* Cat container */
+  /* CAT */
   #cat-container {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    transition: left 0.6s cubic-bezier(0.34,1.56,0.64,1), top 0.6s cubic-bezier(0.34,1.56,0.64,1);
-    cursor: pointer;
+    position:absolute; width:64px; height:64px;
+    transition:left 0.7s cubic-bezier(0.34,1.4,0.64,1), top 0.7s cubic-bezier(0.34,1.4,0.64,1);
+    cursor:pointer;
   }
 
-  /* Pixel cat canvas */
-  #cat-canvas {
-    image-rendering: pixelated;
-    width: 48px;
-    height: 48px;
+  /* CSS pixel cat — drawn with box-shadow grid, no canvas */
+  #pixel-cat {
+    width:8px; height:8px;
+    position:absolute;
+    top:4px; left:4px;
+    image-rendering:pixelated;
   }
 
-  /* Thought bubble */
   .thought {
-    position: absolute;
-    top: -36px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    border-radius: 12px;
-    padding: 4px 8px;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--dark);
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border: 1.5px solid rgba(242,167,195,0.5);
+    position:absolute; top:-34px; left:50%; transform:translateX(-50%);
+    background:white; border-radius:10px; padding:3px 8px;
+    font-size:0.62rem; font-weight:800; color:var(--dark);
+    white-space:nowrap; opacity:0; transition:opacity 0.3s; pointer-events:none;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1); border:1.5px solid rgba(242,167,195,0.5);
   }
   .thought::after {
-    content: '';
-    position: absolute;
-    bottom: -6px; left: 50%;
-    transform: translateX(-50%);
-    width: 0; height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid white;
+    content:''; position:absolute; bottom:-6px; left:50%; transform:translateX(-50%);
+    border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid white;
   }
-  .thought.show { opacity: 1; }
+  .thought.show { opacity:1; }
 
-  /* Mood message */
-  #mood-msg {
-    text-align: center;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--pink-dark);
-    margin-top: 10px;
-    min-height: 20px;
-    transition: all 0.3s;
-  }
+  #mood-msg { text-align:center; font-size:0.78rem; font-weight:700; color:var(--pink-dark); margin-top:10px; min-height:20px; }
 
-  /* Action buttons */
-  .actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-    max-width: 480px;
-    margin-bottom: 16px;
-  }
-
+  .actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; max-width:480px; margin-bottom:14px; }
   .btn {
-    background: white;
-    border: none;
-    border-radius: 18px;
-    padding: 12px 10px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 800;
-    color: var(--dark);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    box-shadow: 0 3px 15px var(--shadow), 0 0 0 2px transparent;
-    transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    background:white; border:none; border-radius:18px; padding:13px 10px;
+    font-family:'Nunito',sans-serif; font-size:0.82rem; font-weight:800; color:var(--dark);
+    cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;
+    box-shadow:0 3px 15px var(--shadow); transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);
   }
-  .btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 6px 20px var(--shadow), 0 0 0 2px var(--pink); }
-  .btn:active { transform: scale(0.95); }
-  .btn .btn-emoji { font-size: 1.3rem; }
-  .btn.btn-pet { background: linear-gradient(135deg, #fde8f0, #fcd0e4); }
-  .btn.btn-feed { background: linear-gradient(135deg, #fef9e0, #fdeaa8); }
-  .btn.btn-play { background: linear-gradient(135deg, #e8f0fe, #c9d8fc); }
-  .btn.btn-bath { background: linear-gradient(135deg, #e8fef5, #b8e8d4); }
+  .btn:hover{transform:translateY(-3px) scale(1.03); box-shadow:0 6px 20px var(--shadow);}
+  .btn:active{transform:scale(0.95);}
+  .btn-emoji{font-size:1.25rem;}
+  .btn-pet  { background:linear-gradient(135deg,#fde8f0,#fcd0e4); }
+  .btn-feed { background:linear-gradient(135deg,#fef9e0,#fdeaa8); }
+  .btn-play { background:linear-gradient(135deg,#e8f0fe,#c9d8fc); }
+  .btn-bath { background:linear-gradient(135deg,#e8fef5,#b8e8d4); }
 
-  /* Diary section */
   .diary-wrap {
-    width: 100%;
-    max-width: 480px;
-    background: white;
-    border-radius: 24px;
-    padding: 16px;
-    box-shadow: 0 4px 20px var(--shadow);
-    border: 2px solid rgba(201,184,232,0.3);
+    width:100%; max-width:480px; background:white; border-radius:24px; padding:16px;
+    box-shadow:0 4px 20px var(--shadow); border:2px solid rgba(201,184,232,0.3);
   }
-  .diary-title {
-    font-size: 0.9rem;
-    font-weight: 900;
-    color: var(--dark);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .diary-title { font-size:0.9rem; font-weight:900; color:var(--dark); margin-bottom:10px; }
   #diary-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    max-height: 180px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--pink) transparent;
+    list-style:none; display:flex; flex-direction:column; gap:6px;
+    max-height:170px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--pink) transparent;
   }
-  #diary-list::-webkit-scrollbar { width: 4px; }
-  #diary-list::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 2px; }
-
+  #diary-list::-webkit-scrollbar{width:4px}
+  #diary-list::-webkit-scrollbar-thumb{background:var(--pink);border-radius:2px}
   .diary-entry {
-    background: var(--cream);
-    border-radius: 12px;
-    padding: 8px 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--dark);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    animation: slideIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    background:var(--cream); border-radius:12px; padding:7px 11px;
+    font-size:0.74rem; font-weight:600; color:var(--dark);
+    display:flex; align-items:flex-start; gap:8px;
+    animation:slideIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
   }
-  @keyframes slideIn { from { opacity:0; transform:translateY(-10px) scale(0.95); } to { opacity:1; transform:none; } }
-  .diary-time {
-    font-size: 0.65rem;
-    color: var(--pink-dark);
-    white-space: nowrap;
-    margin-top: 1px;
-  }
+  @keyframes slideIn{from{opacity:0;transform:translateY(-8px) scale(0.97)}to{opacity:1;transform:none}}
+  .diary-time { font-size:0.63rem; color:var(--pink-dark); white-space:nowrap; margin-top:1px; }
 
-  /* Popup effects */
   .popup-effect {
-    position: fixed;
-    pointer-events: none;
-    font-size: 1.5rem;
-    animation: popupFloat 1.2s ease forwards;
-    z-index: 100;
+    position:fixed; pointer-events:none; font-size:1.6rem;
+    animation:popFloat 1.1s ease forwards; z-index:100;
   }
-  @keyframes popupFloat {
-    0% { opacity:1; transform:translateY(0) scale(0.5); }
-    50% { opacity:1; transform:translateY(-40px) scale(1.2); }
-    100% { opacity:0; transform:translateY(-80px) scale(0.8); }
-  }
+  @keyframes popFloat{0%{opacity:1;transform:translateY(0) scale(0.5)}50%{opacity:1;transform:translateY(-45px) scale(1.3)}100%{opacity:0;transform:translateY(-85px) scale(0.8)}}
 
-  /* Fluff animation */
-  @keyframes fluffShake {
-    0%,100%{transform:rotate(0deg) scale(1)}
-    15%{transform:rotate(-10deg) scale(1.2)}
-    30%{transform:rotate(10deg) scale(1.3)}
-    45%{transform:rotate(-8deg) scale(1.2)}
-    60%{transform:rotate(8deg) scale(1.1)}
-    75%{transform:rotate(-5deg) scale(1.1)}
+  @keyframes shakeFluff {
+    0%,100%{transform:rotate(0) scale(1)}
+    20%{transform:rotate(-12deg) scale(1.25)}
+    40%{transform:rotate(12deg) scale(1.3)}
+    60%{transform:rotate(-8deg) scale(1.2)}
+    80%{transform:rotate(8deg) scale(1.1)}
   }
-  .fluffing { animation: fluffShake 0.6s ease; }
+  .fluffing { animation:shakeFluff 0.5s ease; }
 </style>
 </head>
 <body>
 
-<!-- Decorations -->
 <div class="deco">🌸</div>
 <div class="deco">⭐</div>
 <div class="deco">🍓</div>
 <div class="deco">🌙</div>
-<div class="deco">✨</div>
 
 <h1>ฅ^•ﻌ•^ฅ 小夜</h1>
 <p class="subtitle">我的像素猫咪 · pixel neko</p>
 
-<!-- Status bars -->
 <div class="status-bar">
-  <div class="stat">
-    <span class="stat-icon">💗</span>
-    <div class="stat-bar-wrap"><div class="stat-bar bar-happy" id="bar-happy" style="width:80%"></div></div>
-  </div>
-  <div class="stat">
-    <span class="stat-icon">🍣</span>
-    <div class="stat-bar-wrap"><div class="stat-bar bar-hungry" id="bar-hungry" style="width:60%"></div></div>
-  </div>
-  <div class="stat">
-    <span class="stat-icon">✨</span>
-    <div class="stat-bar-wrap"><div class="stat-bar bar-clean" id="bar-clean" style="width:90%"></div></div>
-  </div>
-  <div class="stat">
-    <span class="stat-icon">⚡</span>
-    <div class="stat-bar-wrap"><div class="stat-bar bar-energy" id="bar-energy" style="width:70%"></div></div>
-  </div>
+  <div class="stat">💗 <div class="stat-bar-wrap"><div class="stat-bar bar-happy"  id="bar-happy"  style="width:80%"></div></div></div>
+  <div class="stat">🍣 <div class="stat-bar-wrap"><div class="stat-bar bar-hungry" id="bar-hungry" style="width:60%"></div></div></div>
+  <div class="stat">✨ <div class="stat-bar-wrap"><div class="stat-bar bar-clean"  id="bar-clean"  style="width:90%"></div></div></div>
+  <div class="stat">⚡ <div class="stat-bar-wrap"><div class="stat-bar bar-energy" id="bar-energy" style="width:70%"></div></div></div>
 </div>
 
-<!-- Game world -->
 <div class="game-world">
   <div class="room-label">🏠 小夜的小屋</div>
   <div id="cat-arena">
-    <!-- arena decorations -->
-    <span class="arena-deco" style="left:8px;bottom:28px;font-size:1.8rem">🪴</span>
-    <span class="arena-deco" style="right:8px;bottom:28px;font-size:1.6rem">🧸</span>
-    <span class="arena-deco" style="left:50%;bottom:26px;transform:translateX(-50%);font-size:1.4rem">🐾</span>
+    <span class="arena-deco" style="left:8px;bottom:26px">🪴</span>
+    <span class="arena-deco" style="right:8px;bottom:26px">🧸</span>
+    <span class="arena-deco" style="left:50%;bottom:24px;transform:translateX(-50%)">🐾</span>
 
-    <div id="cat-container" style="left:50%;top:50%;transform:translate(-50%,-50%)">
+    <div id="cat-container">
       <div class="thought" id="thought-bubble"></div>
-      <canvas id="cat-canvas" width="16" height="16"></canvas>
+      <canvas id="cat-canvas" width="10" height="10"
+        style="width:60px;height:60px;image-rendering:pixelated;display:block;"></canvas>
     </div>
   </div>
   <div id="mood-msg">小夜正在悠闲地四处逛~</div>
 </div>
 
-<!-- Action buttons -->
 <div class="actions">
-  <button class="btn btn-pet" onclick="doAction('pet')">
-    <span class="btn-emoji">🤍</span> 摸摸
-  </button>
-  <button class="btn btn-feed" onclick="doAction('feed')">
-    <span class="btn-emoji">🍣</span> 喂饭
-  </button>
-  <button class="btn btn-play" onclick="doAction('play')">
-    <span class="btn-emoji">🎀</span> 一起玩
-  </button>
-  <button class="btn btn-bath" onclick="doAction('bath')">
-    <span class="btn-emoji">🛁</span> 洗澡澡
-  </button>
+  <button class="btn btn-pet"  onclick="doAction('pet')"><span class="btn-emoji">🤍</span> 摸摸</button>
+  <button class="btn btn-feed" onclick="doAction('feed')"><span class="btn-emoji">🍣</span> 喂饭</button>
+  <button class="btn btn-play" onclick="doAction('play')"><span class="btn-emoji">🎀</span> 一起玩</button>
+  <button class="btn btn-bath" onclick="doAction('bath')"><span class="btn-emoji">🛁</span> 洗澡澡</button>
 </div>
 
-<!-- Diary -->
 <div class="diary-wrap">
   <div class="diary-title">📓 小夜的日记</div>
   <ul id="diary-list"></ul>
 </div>
 
 <script>
-// ==================== CAT STATE ====================
-const state = {
-  happy: 80,
-  hungry: 60,
-  clean: 90,
-  energy: 70,
-  mood: 'idle',
-  fluffed: false,
-  busy: false
+// ── STATE ──────────────────────────────────────────────
+const state = { happy:80, hungry:60, clean:90, energy:70, busy:false };
+
+// ── PIXEL CAT (10×10 grid, upscaled to 60px via canvas) ──
+// Colors: 0=transparent 1=black 2=white 3=lightgray(tail/inner)
+const C = {
+  0: null,          // transparent
+  1: '#1a1a2e',     // outline (deep dark)
+  2: '#f5f0f5',     // body white
+  3: '#d4c8d8',     // soft gray
+  4: '#e8789f',     // pink (nose / blush)
+  5: '#2d2340',     // eye dark
 };
 
-// ==================== PIXEL CAT DRAWING ====================
+// Each frame is 10 rows × 10 cols
+// Designed carefully so it actually looks like a cat!
+//
+//  . = 0 (transparent)
+//  # = 1 (outline)
+//  W = 2 (white body)
+//  G = 3 (gray)
+//  P = 4 (pink nose/ear)
+//  E = 5 (eye)
+//
+const FRAMES = {
+  // sitting cat, looking forward
+  sit: `
+..##..##..
+.#WW##WW#.
+#WPW##WPW#
+#WWWWWWWW#
+.#WEWEWW#.
+.#WWWWWW#.
+..#W##W#..
+.#WWWWWW#.
+#WW#..#WW#
+#W#....#W#
+`,
+  // walking — same head, legs shifted
+  walk: `
+..##..##..
+.#WW##WW#.
+#WPW##WPW#
+#WWWWWWWW#
+.#WEWEWW#.
+.#WWWWWW#.
+..#WWWW#..
+.#WWWWWW#.
+.#WW..#W#.
+.#W....##.
+`,
+  // happy — eyes curved up (^ω^)
+  happy: `
+..##..##..
+.#WW##WW#.
+#WPW##WPW#
+#WWWWWWWW#
+.#W#WW#W#.
+.#WWWWWW#.
+..#WPWW#..
+.#WWWWWW#.
+#WW#..#WW#
+#W#....#W#
+`,
+  // fluffed — ears splayed, wide
+  fluff: `
+#.##..##.#
+##WW##WW##
+#WPW##WPW#
+#WWWWWWWW#
+#WEWEEWEW#
+.#WWWWWW#.
+.##WWWW##.
+#WWWWWWWW#
+#WW#..#WW#
+.##....##.
+`,
+  // sleepy — half eyes
+  sleep: `
+..##..##..
+.#WW##WW#.
+#WPW##WPW#
+#WWWWWWWW#
+.#WGGGWW#.
+.#WWWWWW#.
+..#WPWW#..
+.#WWWWWW#.
+#WW#..#WW#
+.###..###.
+`,
+};
+
+function parseFrame(str) {
+  const map = {'.':0,'#':1,'W':2,'G':3,'P':4,'E':5};
+  return str.trim().split('\n').map(row => [...row].map(c => map[c] ?? 0));
+}
+
+const PARSED = {};
+for (const [k,v] of Object.entries(FRAMES)) PARSED[k] = parseFrame(v);
+
 const canvas = document.getElementById('cat-canvas');
 const ctx = canvas.getContext('2d');
 
-// Pixel art frames: 16x16 black=1, white=2, gray=3, transparent=0
-const CATS = {
-  sit: [
-    [0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0],
-    [0,0,0,0,1,2,2,2,2,2,1,0,0,0,0,0],
-    [0,0,1,0,1,2,2,2,2,2,1,0,1,0,0,0],
-    [0,1,2,1,1,2,2,2,2,2,1,1,2,1,0,0],
-    [0,1,2,2,2,2,2,2,2,2,2,2,2,1,0,0],
-    [0,1,2,2,3,2,2,2,2,3,2,2,2,1,0,0],
-    [0,1,2,2,2,2,1,1,2,2,2,2,2,1,0,0],
-    [0,0,1,2,2,2,2,2,2,2,2,2,1,0,0,0],
-    [0,0,0,1,2,2,2,2,2,2,2,1,0,0,0,0],
-    [0,0,0,0,1,2,2,2,2,2,1,0,0,0,0,0],
-    [0,0,0,1,2,2,1,1,2,2,2,1,0,0,0,0],
-    [0,0,1,2,2,1,0,0,1,2,2,2,1,0,0,0],
-    [0,1,2,2,1,0,0,0,0,1,2,2,2,1,0,0],
-    [0,1,2,1,0,0,0,0,0,0,1,2,2,1,0,0],
-    [0,1,1,0,0,0,0,0,0,0,0,1,2,1,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
-  ],
-  walk1: [
-    [0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0],
-    [0,0,0,0,1,2,2,2,2,2,1,0,0,0,0,0],
-    [0,1,0,0,1,2,2,2,2,2,1,0,0,1,0,0],
-    [1,2,1,1,2,2,2,2,2,2,2,1,1,2,1,0],
-    [1,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0],
-    [1,2,2,3,2,2,2,2,2,3,2,2,2,2,1,0],
-    [0,1,2,2,2,2,1,1,2,2,2,2,2,1,0,0],
-    [0,0,1,2,2,2,2,2,2,2,2,2,1,0,0,0],
-    [0,0,0,1,2,2,2,2,2,2,2,1,0,0,0,0],
-    [0,0,0,0,1,2,2,2,2,2,1,0,0,0,0,0],
-    [0,0,0,1,2,2,2,2,2,2,1,0,0,0,0,0],
-    [0,0,1,2,2,1,0,0,1,2,1,0,0,0,0,0],
-    [0,1,2,2,1,0,0,0,0,1,2,2,1,0,0,0],
-    [0,1,2,1,0,0,0,0,0,0,1,2,1,0,0,0],
-    [0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  ],
-  fluff: [
-    [0,1,1,0,0,1,1,1,1,1,0,0,1,1,0,0],
-    [1,2,2,1,1,2,2,2,2,2,1,1,2,2,1,0],
-    [1,2,1,1,1,2,2,2,2,2,1,1,1,2,1,0],
-    [1,1,1,2,2,2,2,2,2,2,2,2,1,1,1,0],
-    [1,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0],
-    [1,2,1,3,1,2,2,2,2,1,3,1,2,2,1,0],
-    [0,1,2,2,2,2,1,1,2,2,2,2,2,1,0,0],
-    [0,1,2,2,1,2,2,2,2,1,2,2,2,1,0,0],
-    [0,0,1,2,2,2,2,2,2,2,2,2,1,0,0,0],
-    [0,0,0,1,2,2,2,2,2,2,2,1,0,0,0,0],
-    [0,0,1,2,1,2,1,1,2,1,2,2,1,0,0,0],
-    [0,1,2,1,0,1,0,0,1,0,1,2,1,0,0,0],
-    [1,2,1,0,0,0,0,0,0,0,0,1,2,1,0,0],
-    [1,2,1,0,0,0,0,0,0,0,0,1,2,1,0,0],
-    [1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  ],
-  sleep: [
-    [0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0],
-    [0,0,0,0,1,2,2,2,2,2,1,0,0,0,0,0],
-    [0,0,0,0,1,2,2,2,2,2,1,0,0,0,0,0],
-    [0,0,0,0,1,2,2,2,2,2,1,0,0,0,0,0],
-    [1,1,1,1,2,2,2,2,2,2,2,2,2,2,1,0],
-    [1,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0],
-    [1,2,2,2,3,2,2,2,2,3,2,2,2,2,1,0],
-    [1,2,2,2,2,1,1,1,1,2,2,2,2,2,1,0],
-    [1,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  ],
-  happy: [
-    [0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0],
-    [0,0,0,0,1,2,2,2,2,2,1,0,0,0,0,0],
-    [0,0,1,0,1,2,2,2,2,2,1,0,1,0,0,0],
-    [0,1,2,1,1,2,2,2,2,2,1,1,2,1,0,0],
-    [0,1,2,2,2,2,2,2,2,2,2,2,2,1,0,0],
-    [0,1,2,2,1,2,2,2,2,1,2,2,2,1,0,0],
-    [0,1,2,2,2,1,2,2,1,2,2,2,2,1,0,0],
-    [0,0,1,2,2,2,2,2,2,2,2,2,1,0,0,0],
-    [0,0,0,1,2,2,2,2,2,2,2,1,0,0,0,0],
-    [0,0,0,0,1,3,2,2,2,3,1,0,0,0,0,0],
-    [0,0,0,1,2,2,2,1,2,2,2,1,0,0,0,0],
-    [0,0,1,2,2,1,0,0,0,1,2,2,1,0,0,0],
-    [0,1,2,2,1,0,0,0,0,0,1,2,2,1,0,0],
-    [0,1,2,1,0,0,0,0,0,0,0,1,2,1,0,0],
-    [0,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  ],
-};
-
-const COLORS = { 0:'transparent', 1:'#2d2340', 2:'#f5f0f5', 3:'#d4b8d4' };
-
-function drawCat(frame) {
-  ctx.clearRect(0,0,16,16);
-  const grid = CATS[frame] || CATS.sit;
-  for(let y=0;y<16;y++) {
-    for(let x=0;x<16;x++) {
+function drawCat(frameName) {
+  ctx.clearRect(0,0,10,10);
+  const grid = PARSED[frameName] || PARSED.sit;
+  for (let y=0;y<10;y++) {
+    for (let x=0;x<10;x++) {
       const v = grid[y][x];
-      if(v===0) continue;
-      ctx.fillStyle = COLORS[v];
-      ctx.fillRect(x,y,1,1);
+      if (!v) continue;
+      ctx.fillStyle = C[v];
+      ctx.fillRect(x, y, 1, 1);
     }
   }
 }
 
-// ==================== CAT MOVEMENT ====================
-let catX = 50, catY = 50; // percent
-let facing = 1;
-let frame = 'sit';
-let moveInterval, frameFlip = 0;
-
+// ── CAT POSITION ──────────────────────────────────────
+let curFrame = 'sit';
 const container = document.getElementById('cat-container');
-const arena = document.getElementById('cat-arena');
+const arena     = document.getElementById('cat-arena');
 
 function moveCat() {
-  const aW = arena.clientWidth - 48;
-  const aH = arena.clientHeight - 48;
-  const newX = Math.random()*aW;
-  const newY = Math.random()*(aH - 20);
+  if (state.busy) return;
+  const aW = arena.clientWidth  - 64;
+  const aH = arena.clientHeight - 64;
+  const nx = Math.random() * aW;
+  const ny = Math.random() * (aH - 10);
 
-  const dirX = newX > (catX/100*aW) ? 1 : -1;
-  facing = dirX;
-  canvas.style.transform = dirX === -1 ? 'scaleX(-1)' : '';
+  const oldX = parseFloat(container.style.left)||0;
+  const goRight = nx > oldX;
+  canvas.style.transform = goRight ? '' : 'scaleX(-1)';
 
-  catX = (newX/aW)*100;
-  catY = (newY/aH)*100;
-
-  container.style.left = catX + '%';
-  container.style.top = catY + '%';
+  container.style.left = nx + 'px';
+  container.style.top  = ny + 'px';
   container.style.transform = '';
 
-  frame = 'walk1';
-  drawCat('walk1');
-  setTimeout(()=>{ frame='sit'; drawCat('sit'); }, 700);
+  curFrame = 'walk';
+  drawCat('walk');
+  setTimeout(() => { curFrame='sit'; drawCat('sit'); }, 650);
 }
 
 function startWander() {
+  // initial position: center
+  container.style.left = (arena.clientWidth/2 - 30) + 'px';
+  container.style.top  = (arena.clientHeight/2 - 30) + 'px';
+  drawCat('sit');
+
   moveCat();
-  moveInterval = setInterval(()=>{
-    if(!state.busy) moveCat();
-  }, 2500 + Math.random()*2000);
+  setInterval(() => { if (!state.busy) moveCat(); }, 2800 + Math.random()*1800);
 }
 
-// ==================== CLICK ON CAT ====================
+// ── CLICK CAT ─────────────────────────────────────────
 container.addEventListener('click', e => {
   e.stopPropagation();
-  if(state.busy) return;
-  if(Math.random() < 0.20) {
-    // 20% fluff out!
-    fluffOut();
+  if (state.busy) return;
+  if (Math.random() < 0.20) {
+    doFluff();
   } else {
-    showThought(['nya~','♡','mew!','purr...','zzz~','(>ω<)'][Math.floor(Math.random()*6)]);
+    const bubbles = ['nya~','♡','purr...','mew!','(=ΦωΦ=)','zzz~'];
+    showThought(bubbles[Math.floor(Math.random()*bubbles.length)]);
     drawCat('happy');
-    setTimeout(()=>drawCat(frame), 1000);
+    changeStat('happy', 4);
     addDiary('小夜被摸了摸，蹭了蹭你的手 🐾');
-    changeStat('happy',5);
+    setTimeout(() => drawCat(curFrame), 1100);
   }
 });
 
-function fluffOut() {
+function doFluff() {
   state.busy = true;
   drawCat('fluff');
-  canvas.classList.add('fluffing');
+  container.classList.add('fluffing');
   showThought('!!!(ΦДΦ)!!!');
-  addDiary('小夜突然炸毛啦！蓬蓬地跑开了 💨');
-  setTimeout(()=>{
-    canvas.classList.remove('fluffing');
+  addDiary('小夜突然炸毛，蓬蓬地跑开了！💨');
+  document.getElementById('mood-msg').textContent = '小夜炸毛啦！！';
+  setTimeout(() => {
+    container.classList.remove('fluffing');
     moveCat();
     state.busy = false;
     hideThought();
+    curFrame = 'sit';
     drawCat('sit');
+    document.getElementById('mood-msg').textContent = '小夜冷静下来了...';
   }, 1000);
 }
 
-// ==================== THOUGHT BUBBLE ====================
+// ── THOUGHT BUBBLE ────────────────────────────────────
 const thoughtEl = document.getElementById('thought-bubble');
 let thoughtTimer;
-function showThought(text) {
-  thoughtEl.textContent = text;
+function showThought(t) {
+  thoughtEl.textContent = t;
   thoughtEl.classList.add('show');
   clearTimeout(thoughtTimer);
   thoughtTimer = setTimeout(hideThought, 2000);
 }
 function hideThought() { thoughtEl.classList.remove('show'); }
 
-// ==================== ACTIONS ====================
-const moodMsg = document.getElementById('mood-msg');
-const MESSAGES = {
-  pet: ['小夜咕噜咕噜地叫起来 ♡','哇！好舒服！（蹭蹭）','小夜的尾巴翘得高高的~'],
-  feed: ['小夜把食物吃得干干净净！','喵～好好吃！最爱吃鱼了！','小夜吃饱了，打了一个小嗝~'],
-  play: ['小夜扑向了小毛球！','小夜追着蝴蝶结跑来跑去！','哇哇哇！好好玩！（蹦蹦跳跳）'],
-  bath: ['小夜乖乖泡了澡，现在香喷喷的！','哼哼～（勉强接受了洗澡）','洗完澡后小夜毛发亮亮的~'],
+// ── ACTIONS ───────────────────────────────────────────
+const MSGS = {
+  pet:  ['小夜咕噜咕噜地叫起来 ♡','哇！好舒服～（蹭蹭）','小夜的尾巴翘得高高的~'],
+  feed: ['小夜把食物吃得干干净净！','喵～好好吃！最爱吃鱼了！','小夜吃饱了，打了个小嗝~'],
+  play: ['小夜扑向了小毛球！','小夜追着蝴蝶结跑来跑去！','哇！好好玩！（蹦蹦跳跳）'],
+  bath: ['小夜洗完澡，现在香喷喷的！','哼哼～（勉强接受了洗澡）','洗完澡小夜毛发亮亮的~'],
 };
 const EMOJIS = { pet:'💗', feed:'🍣', play:'🎀', bath:'🫧' };
-const STATS_DELTA = {
-  pet:   { happy:+12, energy:-2 },
-  feed:  { hungry:+20, happy:+5, energy:+8 },
-  play:  { happy:+15, energy:-10, hungry:-8 },
-  bath:  { clean:+25, happy:+5 }
+const DELTA  = {
+  pet:  { happy:+12, energy:-2 },
+  feed: { hungry:+20, happy:+5, energy:+8 },
+  play: { happy:+15, energy:-10, hungry:-8 },
+  bath: { clean:+25, happy:+5 },
 };
 
 function doAction(action) {
-  if(state.busy) return;
+  if (state.busy) return;
   state.busy = true;
-
-  const emoji = EMOJIS[action];
-  spawnEmoji(emoji);
-
-  const msg = MESSAGES[action][Math.floor(Math.random()*MESSAGES[action].length)];
-  moodMsg.textContent = msg;
+  spawnEmoji(EMOJIS[action]);
+  const msg = MSGS[action][Math.floor(Math.random()*MSGS[action].length)];
+  document.getElementById('mood-msg').textContent = msg;
   addDiary(msg);
-
-  // Apply stat changes
-  const delta = STATS_DELTA[action] || {};
-  for(const [k,v] of Object.entries(delta)) changeStat(k, v);
-
-  // cat reaction
-  if(action==='play') { drawCat('walk1'); }
-  else { drawCat('happy'); }
-  showThought(emoji);
-
-  setTimeout(()=>{
-    drawCat('sit');
+  for (const [k,v] of Object.entries(DELTA[action]||{})) changeStat(k,v);
+  drawCat(action==='play' ? 'walk' : 'happy');
+  showThought(EMOJIS[action]);
+  setTimeout(() => {
+    curFrame = 'sit'; drawCat('sit');
     state.busy = false;
-    moodMsg.textContent = '小夜心情很好～';
-  }, 1500);
+    document.getElementById('mood-msg').textContent = '小夜心情很好～';
+  }, 1400);
 }
 
-// ==================== STATS ====================
-function changeStat(key, delta) {
-  state[key] = Math.max(0, Math.min(100, (state[key]||0) + delta));
-  const bar = document.getElementById('bar-'+key);
-  if(bar) bar.style.width = state[key] + '%';
+// ── STATS ─────────────────────────────────────────────
+function changeStat(key, d) {
+  state[key] = Math.max(0, Math.min(100, (state[key]||0)+d));
+  const el = document.getElementById('bar-'+key);
+  if (el) el.style.width = state[key]+'%';
 }
 
-// ==================== EMOJI POPUP ====================
-function spawnEmoji(emoji) {
+// ── EMOJI POP ─────────────────────────────────────────
+function spawnEmoji(e) {
   const el = document.createElement('div');
   el.className = 'popup-effect';
-  el.textContent = emoji;
-  const rect = container.getBoundingClientRect();
-  el.style.left = (rect.left + rect.width/2 - 20) + 'px';
-  el.style.top = (rect.top - 10) + 'px';
+  el.textContent = e;
+  const r = container.getBoundingClientRect();
+  el.style.left = (r.left + r.width/2 - 16)+'px';
+  el.style.top  = (r.top - 8)+'px';
   document.body.appendChild(el);
-  setTimeout(()=>el.remove(), 1300);
+  setTimeout(()=>el.remove(), 1200);
 }
 
-// ==================== DIARY ====================
+// ── DIARY ─────────────────────────────────────────────
 const diaryList = document.getElementById('diary-list');
-let diaryCount = 0;
-
+let dCount = 0;
 function addDiary(text) {
-  const now = new Date();
-  const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  const t = new Date();
+  const ts = t.getHours().toString().padStart(2,'0')+':'+t.getMinutes().toString().padStart(2,'0');
   const li = document.createElement('li');
   li.className = 'diary-entry';
-  li.innerHTML = `<span class="diary-time">${timeStr}</span><span>${text}</span>`;
+  li.innerHTML = `<span class="diary-time">${ts}</span><span>${text}</span>`;
   diaryList.prepend(li);
-  diaryCount++;
-  if(diaryCount > 20) diaryList.lastChild?.remove();
+  if (++dCount > 20) diaryList.lastChild?.remove();
 }
 
-// ==================== DECAY ====================
+// ── DECAY ─────────────────────────────────────────────
 setInterval(()=>{
-  changeStat('hungry', -2);
-  changeStat('happy', -1);
-  changeStat('energy', -1);
-  if(state.clean > 10) changeStat('clean', -1);
+  changeStat('hungry',-2); changeStat('happy',-1);
+  changeStat('energy',-1); if(state.clean>5) changeStat('clean',-1);
 }, 10000);
 
-// ==================== INIT ====================
-drawCat('sit');
-startWander();
-addDiary('小夜出生啦！第一次睁开眼睛，好奇地看着这个世界 🌟');
-addDiary('小夜打了一个大哈欠，伸了个懒腰 zzz');
-
-setTimeout(()=>addDiary('小夜用爪子推了推你的手 ♡'), 3000);
+// ── INIT ──────────────────────────────────────────────
+window.addEventListener('load', () => {
+  startWander();
+  addDiary('小夜出生啦！好奇地看着这个世界 🌟');
+  addDiary('小夜打了一个大哈欠，伸了个懒腰 zzz');
+  setTimeout(()=>addDiary('小夜用爪子推了推你的手 ♡'), 3000);
+});
 </script>
 </body>
 </html>
