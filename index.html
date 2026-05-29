@@ -302,27 +302,27 @@ function changeAff(d){
 }
 
 function triggerGift(){
-  state.busy=true;
+  if(state.busy) return;
+  state.busy = true;
   setFace('gift');
   setAnim('gift');
-  moodMsg.textContent='小夜跑过来，在你脚边放下了什么……';
+  moodMsg.textContent = '小夜跑过来，在你脚边放下了什么……';
   showThought('(=^▽^=)🎁');
 
-  // pick gift — 5% chance rare
-  let pool=Math.random()<0.05 ? GIFTS.filter(g=>g.rare) : GIFTS.filter(g=>!g.rare);
-  if(!pool.length) pool=GIFTS;
-  const gift=rnd(pool);
+  let pool = Math.random()<0.05 ? GIFTS.filter(g=>g.rare) : GIFTS.filter(g=>!g.rare);
+  if(!pool.length) pool = GIFTS;
+  const gift = rnd(pool);
 
   setTimeout(()=>{
-    const popup=document.getElementById('gift-popup');
-    document.getElementById('gift-item-display').textContent=gift.item;
-    document.getElementById('gift-desc').textContent=gift.desc;
+    const popup = document.getElementById('gift-popup');
+    document.getElementById('gift-item-display').textContent = gift.item;
+    document.getElementById('gift-desc').textContent = gift.desc;
     popup.classList.add('show');
     addDiary(gift.desc + ' ' + gift.item, 'gift-entry');
     if(gift.rare) addDiary('（稀有礼物！！）', 'rare');
     hideThought();
-    state.busy=false;
-  },1200);
+    state.busy = false; // release busy so player can still interact while popup open
+  }, 1200);
 }
 
 function closeGift(){
@@ -413,46 +413,57 @@ const DELTA={
   gun:  {stat:{happy:-15},aff:-15},
 };
 
+function endAction(msg){
+  setFace('idle'); setAnim('idle'); hideBlush();
+  state.busy = false;
+  if(msg) moodMsg.textContent = msg;
+}
+
 function doAction(action){
-  if(state.busy)return;
-  state.busy=true;
+  if(state.busy) return;
+  state.busy = true;
   spawnEmoji(EMOJIS[action]);
-  const msg=rnd(MSGS[action]);
-  moodMsg.textContent=msg;
+  const msg = rnd(MSGS[action]);
+  moodMsg.textContent = msg;
   addDiary(msg);
-  const d=DELTA[action]||{};
-  for(const[k,v]of Object.entries(d.stat||{})) changeStat(k,v);
+  const d = DELTA[action] || {};
+  for(const [k,v] of Object.entries(d.stat||{})) changeStat(k,v);
   changeAff(d.aff||0);
 
   if(action==='gun'){
-    // water gun — cat goes angry with knife!
-    setFace('gun');setAnim('water');
+    setFace('gun'); setAnim('water');
     showThought('( ･᷄ὢ･᷅ )🔪');
     setTimeout(()=>{
-      setAnim('angry');
+      setFace('angry'); setAnim('angry');
       setTimeout(()=>{
-        moveCat();state.busy=false;
-        moodMsg.textContent='小夜非常生气！（好感度↓↓）';
-        setFace('angry');
-        setTimeout(()=>{setFace('idle');setAnim('idle');},2500);
-      },700);
-    },600);
+        moveCat();
+        moodMsg.textContent = '小夜非常生气！（好感度↓↓）';
+        setAnim('idle');
+        state.busy = false;
+        setTimeout(()=>{ setFace('idle'); }, 2500);
+      }, 700);
+    }, 600);
+
   } else if(action==='bath'){
-    setFace('bath');setAnim('fluff');
+    setFace('bath'); setAnim('fluff');
     showThought(rnd(['ﾔﾀﾞ(=；ω；=)','(≧Дﾐ)ｲﾔｧ']));
-    setTimeout(()=>{setFace('idle');setAnim('idle');showBlush();
-      setTimeout(hideBlush,800);state.busy=false;moodMsg.textContent='小夜心情很好～（香喷喷）';},1400);
+    setTimeout(()=>{ endAction('小夜心情很好～（香喷喷）'); }, 1400);
+
   } else if(action==='feed'){
-    setFace('feed');setAnim('purr');showBlush();
+    setFace('feed'); setAnim('purr'); showBlush();
     showThought('( ˙༥˙ )ﾓｸﾞﾓｸﾞ');
-    // random drop?
-    if(Math.random()<0.12) setTimeout(dropRandomItem,600);
-    setTimeout(()=>{setFace('idle');setAnim('idle');hideBlush();state.busy=false;moodMsg.textContent='小夜吃饱啦～';},1500);
-  } else {
-    setFace(action);setAnim(action==='play'?'walk':'purr');
-    if(action!=='play') showBlush();
+    if(Math.random()<0.12) setTimeout(dropRandomItem, 600);
+    setTimeout(()=>{ endAction('小夜吃饱啦～'); }, 1500);
+
+  } else if(action==='play'){
+    setFace('play'); setAnim('walk');
     showThought(EMOJIS[action]);
-    setTimeout(()=>{setFace('idle');setAnim('idle');hideBlush();state.busy=false;moodMsg.textContent='小夜心情很好～';},1400);
+    setTimeout(()=>{ endAction('小夜玩得好开心～'); }, 1400);
+
+  } else {
+    setFace(action); setAnim('purr'); showBlush();
+    showThought(EMOJIS[action]);
+    setTimeout(()=>{ endAction('小夜心情很好～'); }, 1400);
   }
 }
 
