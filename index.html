@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ฅ^•ﻌ•^ฅ 我的像素猫咪</title>
+<title>ฅ^•ﻌ•^ฅ 小夜</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
   :root{
@@ -20,7 +20,8 @@
       radial-gradient(circle at 20% 20%,rgba(242,167,195,.15) 0%,transparent 50%),
       radial-gradient(circle at 80% 80%,rgba(201,184,232,.15) 0%,transparent 50%);
   }
-  .deco{position:fixed;pointer-events:none;font-size:1.1rem;opacity:.22;animation:flt 6s ease-in-out infinite}
+
+  .deco{position:fixed;pointer-events:none;font-size:1.1rem;opacity:.2;animation:flt 6s ease-in-out infinite}
   .deco:nth-child(1){top:5%;left:5%;animation-delay:0s}
   .deco:nth-child(2){top:15%;right:8%;animation-delay:1.5s}
   .deco:nth-child(3){bottom:20%;left:3%;animation-delay:3s}
@@ -49,69 +50,78 @@
     width:100%;height:230px;
     background:linear-gradient(180deg,#fce8f5 0%,#fdf0f8 65%,#f8e8e0 100%);
     border-radius:20px;position:relative;overflow:hidden;cursor:pointer;
-    border:2px solid rgba(242,167,195,.35)
+    border:2px solid rgba(242,167,195,.35);
+    user-select:none;
   }
-  #cat-arena::after{
-    content:'';position:absolute;bottom:0;left:0;right:0;height:28px;
-    background:linear-gradient(180deg,transparent,rgba(232,180,210,.18));
-    border-radius:0 0 18px 18px;pointer-events:none
-  }
-  .arena-deco{position:absolute;font-size:1.3rem;pointer-events:none;opacity:.5}
+  .arena-deco{position:absolute;font-size:1.3rem;pointer-events:none;opacity:.45}
 
+  /* ── THE CAT ── */
   #cat-wrap{
-    position:absolute;width:90px;height:90px;
-    transition:left .8s cubic-bezier(.34,1.3,.64,1),top .8s cubic-bezier(.34,1.3,.64,1);
+    position:absolute;
     cursor:pointer;
+    transition:left .7s cubic-bezier(.34,1.3,.64,1), top .7s cubic-bezier(.34,1.3,.64,1);
+    display:flex;flex-direction:column;align-items:center;
+    line-height:1;
   }
-  #cat-svg{width:90px;height:90px;display:block;overflow:visible}
 
-  @keyframes idleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-  @keyframes walkBounce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
-  @keyframes purrPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  #cat-face{
+    font-size:2rem;
+    display:block;
+    transition:transform .15s;
+    filter: drop-shadow(0 2px 6px rgba(200,130,170,.3));
+  }
+
+  /* animations on cat-wrap */
+  @keyframes idleBob{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-5px) rotate(2deg)}}
+  @keyframes walkWiggle{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-4px) rotate(5deg)}}
+  @keyframes purrBounce{0%,100%{transform:scale(1) rotate(0deg)}33%{transform:scale(1.12) rotate(-4deg)}66%{transform:scale(1.12) rotate(4deg)}}
   @keyframes fluffShake{
     0%,100%{transform:rotate(0) scale(1)}
-    20%{transform:rotate(-14deg) scale(1.2)}
-    40%{transform:rotate(14deg) scale(1.25)}
-    60%{transform:rotate(-9deg) scale(1.18)}
-    80%{transform:rotate(9deg) scale(1.1)}
+    20%{transform:rotate(-18deg) scale(1.25)}
+    40%{transform:rotate(18deg) scale(1.3)}
+    60%{transform:rotate(-12deg) scale(1.2)}
+    80%{transform:rotate(10deg) scale(1.1)}
   }
-  @keyframes tailWag{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(20deg)}}
+  @keyframes spinJoy{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 
-  .state-idle   #cat-svg{animation:idleBob 2s ease-in-out infinite}
-  .state-walk   #cat-svg{animation:walkBounce .38s ease infinite}
-  .state-purr   #cat-svg{animation:purrPulse .55s ease infinite}
-  .state-fluff  #cat-svg{animation:fluffShake .5s ease}
+  .anim-idle   #cat-face{animation:idleBob 2s ease-in-out infinite}
+  .anim-walk   #cat-face{animation:walkWiggle .35s ease-in-out infinite}
+  .anim-purr   #cat-face{animation:purrBounce .5s ease-in-out infinite}
+  .anim-fluff  #cat-face{animation:fluffShake .5s ease forwards}
+  .anim-spin   #cat-face{animation:spinJoy .5s linear}
 
-  #cat-tail{transform-origin:12px 8px;animation:tailWag 1.2s ease-in-out infinite}
-
+  /* thought bubble */
   .thought{
-    position:absolute;top:-38px;left:50%;transform:translateX(-50%);
-    background:white;border-radius:12px;padding:4px 10px;
-    font-size:.68rem;font-weight:800;color:var(--dark);
+    position:absolute;top:-36px;left:50%;transform:translateX(-50%);
+    background:white;border-radius:12px;padding:3px 10px;
+    font-size:.65rem;font-weight:800;color:var(--dark);
     white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);border:1.5px solid rgba(242,167,195,.5)
+    box-shadow:0 2px 8px rgba(0,0,0,.1);border:1.5px solid rgba(242,167,195,.5);
+    z-index:10;
   }
   .thought::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
     border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid white}
   .thought.show{opacity:1}
 
-  #mood-msg{text-align:center;font-size:.78rem;font-weight:700;color:var(--pink-dark);margin-top:10px;min-height:20px}
+  #mood-msg{text-align:center;font-size:.8rem;font-weight:700;color:var(--pink-dark);margin-top:10px;min-height:20px}
 
+  /* ── BUTTONS ── */
   .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:480px;margin-bottom:14px}
   .btn{
-    background:white;border:none;border-radius:18px;padding:13px 10px;
-    font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;color:var(--dark);
-    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
-    box-shadow:0 3px 15px var(--shadow);transition:all .2s cubic-bezier(.34,1.56,.64,1)
+    background:white;border:none;border-radius:18px;padding:14px 10px;
+    font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:800;color:var(--dark);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;
+    box-shadow:0 3px 15px var(--shadow);transition:all .2s cubic-bezier(.34,1.56,.64,1);
   }
   .btn:hover{transform:translateY(-3px) scale(1.03)}
   .btn:active{transform:scale(.95)}
-  .btn-emoji{font-size:1.25rem}
+  .btn-emoji{font-size:1.3rem}
   .btn-pet{background:linear-gradient(135deg,#fde8f0,#fcd0e4)}
   .btn-feed{background:linear-gradient(135deg,#fef9e0,#fdeaa8)}
   .btn-play{background:linear-gradient(135deg,#e8f0fe,#c9d8fc)}
   .btn-bath{background:linear-gradient(135deg,#e8fef5,#b8e8d4)}
 
+  /* ── DIARY ── */
   .diary-wrap{width:100%;max-width:480px;background:white;border-radius:24px;padding:16px;
     box-shadow:0 4px 20px var(--shadow);border:2px solid rgba(201,184,232,.3)}
   .diary-title{font-size:.9rem;font-weight:900;color:var(--dark);margin-bottom:10px}
@@ -122,15 +132,16 @@
   .diary-entry{background:var(--cream);border-radius:12px;padding:7px 11px;
     font-size:.74rem;font-weight:600;color:var(--dark);display:flex;align-items:flex-start;gap:8px;
     animation:slideIn .35s cubic-bezier(.34,1.56,.64,1)}
-  @keyframes slideIn{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
+  @keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
   .diary-time{font-size:.63rem;color:var(--pink-dark);white-space:nowrap;margin-top:1px}
 
-  .popup-effect{position:fixed;pointer-events:none;font-size:1.6rem;
-    animation:popFloat 1.1s ease forwards;z-index:100}
+  /* popup emoji */
+  .popup-effect{position:fixed;pointer-events:none;font-size:1.8rem;
+    animation:popFloat 1s ease forwards;z-index:999}
   @keyframes popFloat{
-    0%{opacity:1;transform:translateY(0) scale(.5)}
-    50%{opacity:1;transform:translateY(-45px) scale(1.3)}
-    100%{opacity:0;transform:translateY(-85px) scale(.8)}
+    0%{opacity:1;transform:translateY(0) scale(.4)}
+    50%{opacity:1;transform:translateY(-50px) scale(1.3)}
+    100%{opacity:0;transform:translateY(-90px) scale(.9)}
   }
 </style>
 </head>
@@ -154,102 +165,13 @@
 <div class="game-world">
   <div class="room-label">🏠 小夜的小屋</div>
   <div id="cat-arena">
-    <span class="arena-deco" style="left:8px;bottom:26px">🪴</span>
-    <span class="arena-deco" style="right:8px;bottom:26px">🧸</span>
-    <span class="arena-deco" style="left:50%;bottom:22px;transform:translateX(-50%)">🐾</span>
+    <span class="arena-deco" style="left:8px;bottom:22px">🪴</span>
+    <span class="arena-deco" style="right:8px;bottom:22px">🧸</span>
+    <span class="arena-deco" style="left:50%;bottom:18px;transform:translateX(-50%)">🐾</span>
 
-    <div id="cat-wrap" class="state-idle">
+    <div id="cat-wrap" class="anim-idle">
       <div class="thought" id="thought-bubble"></div>
-
-      <svg id="cat-svg" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#c8a0b8" flood-opacity="0.25"/>
-          </filter>
-        </defs>
-
-        <!-- TAIL (wagging) -->
-        <g id="cat-tail">
-          <!-- chunky curved tail -->
-          <path d="M20 72 Q6 68 8 55 Q10 44 22 46" fill="none" stroke="#1a1a2e" stroke-width="7" stroke-linecap="round"/>
-          <path d="M20 72 Q6 68 8 55 Q10 44 22 46" fill="none" stroke="#f5f0f5" stroke-width="4" stroke-linecap="round"/>
-        </g>
-
-        <!-- BODY — big round blob -->
-        <ellipse cx="50" cy="62" rx="26" ry="22" fill="#f5f0f5" stroke="#1a1a2e" stroke-width="3" filter="url(#soft-shadow)"/>
-        <!-- tummy -->
-        <ellipse cx="50" cy="65" rx="15" ry="13" fill="white" opacity=".6"/>
-
-        <!-- LEFT EAR -->
-        <path d="M27 32 Q22 16 34 20 Q38 28 36 35" fill="#f5f0f5" stroke="#1a1a2e" stroke-width="3" stroke-linejoin="round"/>
-        <path d="M29 31 Q25 20 33 23 Q36 29 35 34" fill="#f9c0d0"/>
-        <!-- RIGHT EAR -->
-        <path d="M63 32 Q68 16 56 20 Q52 28 54 35" fill="#f5f0f5" stroke="#1a1a2e" stroke-width="3" stroke-linejoin="round"/>
-        <path d="M61 31 Q65 20 57 23 Q54 29 55 34" fill="#f9c0d0"/>
-
-        <!-- HEAD — big round -->
-        <circle cx="50" cy="38" r="26" fill="#f5f0f5" stroke="#1a1a2e" stroke-width="3" filter="url(#soft-shadow)"/>
-
-        <!-- ── EXPRESSIONS ── -->
-        <!-- NORMAL eyes -->
-        <g id="eyes-normal">
-          <!-- left eye -->
-          <circle cx="38" cy="36" r="7.5" fill="white" stroke="#1a1a2e" stroke-width="2"/>
-          <circle cx="38" cy="37" r="4.5" fill="#1a1a2e"/>
-          <circle cx="39.8" cy="35" r="1.8" fill="white"/>
-          <!-- right eye -->
-          <circle cx="62" cy="36" r="7.5" fill="white" stroke="#1a1a2e" stroke-width="2"/>
-          <circle cx="62" cy="37" r="4.5" fill="#1a1a2e"/>
-          <circle cx="63.8" cy="35" r="1.8" fill="white"/>
-        </g>
-
-        <!-- HAPPY eyes ^^ -->
-        <g id="eyes-happy" style="display:none">
-          <path d="M31 37 Q38 29 45 37" fill="none" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round"/>
-          <path d="M55 37 Q62 29 69 37" fill="none" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round"/>
-        </g>
-
-        <!-- SLEEPY eyes — — -->
-        <g id="eyes-sleep" style="display:none">
-          <path d="M31 37 Q38 37 45 37" fill="none" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round"/>
-          <path d="M55 37 Q62 37 69 37" fill="none" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round"/>
-        </g>
-
-        <!-- SHOCKED eyes OO -->
-        <g id="eyes-scared" style="display:none">
-          <circle cx="38" cy="36" r="9" fill="white" stroke="#1a1a2e" stroke-width="2"/>
-          <circle cx="38" cy="37" r="6" fill="#1a1a2e"/>
-          <circle cx="62" cy="36" r="9" fill="white" stroke="#1a1a2e" stroke-width="2"/>
-          <circle cx="62" cy="37" r="6" fill="#1a1a2e"/>
-        </g>
-
-        <!-- NOSE -->
-        <path d="M47 46 L50 43 L53 46 Q50 49 47 46Z" fill="#f2a7c3" stroke="#e8789f" stroke-width=".5"/>
-        <!-- MOUTH -->
-        <path d="M44 49 Q50 55 56 49" fill="none" stroke="#1a1a2e" stroke-width="2" stroke-linecap="round"/>
-
-        <!-- WHISKERS -->
-        <line x1="15" y1="44" x2="42" y2="46" stroke="#1a1a2e" stroke-width="1.5" opacity=".5" stroke-linecap="round"/>
-        <line x1="15" y1="50" x2="42" y2="49" stroke="#1a1a2e" stroke-width="1.5" opacity=".5" stroke-linecap="round"/>
-        <line x1="85" y1="44" x2="58" y2="46" stroke="#1a1a2e" stroke-width="1.5" opacity=".5" stroke-linecap="round"/>
-        <line x1="85" y1="50" x2="58" y2="49" stroke="#1a1a2e" stroke-width="1.5" opacity=".5" stroke-linecap="round"/>
-
-        <!-- BLUSH -->
-        <ellipse id="blush-l" cx="28" cy="46" rx="7" ry="4.5" fill="#f9b8cf" opacity="0" style="transition:opacity .4s"/>
-        <ellipse id="blush-r" cx="72" cy="46" rx="7" ry="4.5" fill="#f9b8cf" opacity="0" style="transition:opacity .4s"/>
-
-        <!-- PAWS (little round ones at bottom of body) -->
-        <!-- left paw -->
-        <ellipse cx="36" cy="80" rx="10" ry="7" fill="#f5f0f5" stroke="#1a1a2e" stroke-width="2.5"/>
-        <ellipse cx="33" cy="82" rx="3" ry="2.2" fill="#f9c0d0"/>
-        <ellipse cx="37" cy="83.5" rx="3" ry="2.2" fill="#f9c0d0"/>
-        <ellipse cx="41" cy="82" rx="3" ry="2.2" fill="#f9c0d0"/>
-        <!-- right paw -->
-        <ellipse cx="64" cy="80" rx="10" ry="7" fill="#f5f0f5" stroke="#1a1a2e" stroke-width="2.5"/>
-        <ellipse cx="61" cy="82" rx="3" ry="2.2" fill="#f9c0d0"/>
-        <ellipse cx="65" cy="83.5" rx="3" ry="2.2" fill="#f9c0d0"/>
-        <ellipse cx="69" cy="82" rx="3" ry="2.2" fill="#f9c0d0"/>
-      </svg>
+      <span id="cat-face">(=^･ω･^=)</span>
     </div>
   </div>
   <div id="mood-msg">小夜正在悠闲地四处逛~</div>
@@ -268,133 +190,174 @@
 </div>
 
 <script>
+// ── STATE ─────────────────────────────────────────────
 const state={happy:80,hungry:60,clean:90,energy:70,busy:false};
-const wrap=document.getElementById('cat-wrap');
-const arena=document.getElementById('cat-arena');
-const blushL=document.getElementById('blush-l');
-const blushR=document.getElementById('blush-r');
 
-function setCatState(s){
-  wrap.className=''; wrap.classList.add('state-'+s);
-}
-function setEyes(type){
-  ['normal','happy','sleep','scared'].forEach(t=>{
-    document.getElementById('eyes-'+t).style.display=t===type?'':'none';
-  });
-}
-function showBlush(on){
-  blushL.style.opacity=on?'0.75':'0';
-  blushR.style.opacity=on?'0.75':'0';
+// ── CAT FACES per mood ─────────────────────────────────
+const FACES = {
+  idle:  ['(=^･ω･^=)', 'ฅ(^•ﻌ•^ฅ)', '(=^‥^=)', '(^･o･^)ﾉ"'],
+  happy: ['(=^▽^=)', '(＾• ω •＾)♡', 'ฅ(≧▽≦)ฅ', '(*^ω^*)'],
+  walk:  ['(=^･o･^=)ﾉ', 'ε=ε=(=^･ω･^=)', '~(=^‥^)/', '(=^･ｪ･^=)ﾉ彡'],
+  fluff: ['(=ΦエΦ=)!!', '(ΦДΦ)!!', 'ฅ(ΦωΦ)ฅ!!', '(=ＴェＴ=)!!'],
+  feed:  ['(=^ｪ^=)♪', '(^•ω•^∥)🐟', 'ฅ(^▽^ฅ)もぐもぐ'],
+  pet:   ['(=^‥^=)♡', '(≧ω≦)ぐるぐる', 'ฅ(*ΦωΦ*)ฅ'],
+  play:  ['ε=ε=ε=(=^･ω･^=)', '(=^▽^=)ﾉ🎀', 'ฅ(^•ω•^ฅ)ﾉ'],
+  bath:  ['(=；ω；=)ﾔﾀﾞ', '(≧Дﾐ)ﾔﾀﾞﾔﾀﾞ', '(=ＴェＴ=)...'],
+};
+
+function rnd(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+const catWrap = document.getElementById('cat-wrap');
+const catFace = document.getElementById('cat-face');
+const arena   = document.getElementById('cat-arena');
+const thoughtEl = document.getElementById('thought-bubble');
+const moodMsg   = document.getElementById('mood-msg');
+
+function setFace(mood){ catFace.textContent = rnd(FACES[mood]||FACES.idle); }
+function setAnim(a){
+  catWrap.className='';
+  catWrap.classList.add('anim-'+a);
 }
 
 // ── MOVEMENT ──────────────────────────────────────────
+let catX=0, catY=0;
+
 function moveCat(){
-  if(state.busy)return;
-  const aW=arena.clientWidth-90, aH=arena.clientHeight-90;
-  const nx=10+Math.random()*(aW-20);
-  const ny=10+Math.random()*(aH-20);
-  const oldX=parseFloat(wrap.style.left)||0;
-  document.getElementById('cat-svg').style.transform=nx<oldX?'scaleX(-1)':'scaleX(1)';
-  wrap.style.left=nx+'px';
-  wrap.style.top=ny+'px';
-  setCatState('walk');
-  setTimeout(()=>setCatState('idle'),750);
+  if(state.busy) return;
+  const pad=10;
+  const maxX = arena.clientWidth  - catWrap.offsetWidth  - pad;
+  const maxY = arena.clientHeight - catWrap.offsetHeight - pad;
+  const nx = pad + Math.random() * maxX;
+  const ny = pad + Math.random() * maxY;
+
+  // flip for direction
+  catFace.style.transform = nx < catX ? 'scaleX(-1)' : 'scaleX(1)';
+  catX = nx; catY = ny;
+  catWrap.style.left = nx + 'px';
+  catWrap.style.top  = ny + 'px';
+
+  setAnim('walk');
+  setFace('walk');
+  setTimeout(()=>{ setAnim('idle'); setFace('idle'); }, 700);
 }
 
 function init(){
-  wrap.style.left=(arena.clientWidth/2-45)+'px';
-  wrap.style.top=(arena.clientHeight/2-45)+'px';
-  setCatState('idle');
-  setEyes('normal');
-  setTimeout(moveCat,800);
-  setInterval(()=>{if(!state.busy)moveCat();},3000+Math.random()*1500);
+  catX = arena.clientWidth/2  - 50;
+  catY = arena.clientHeight/2 - 20;
+  catWrap.style.left = catX+'px';
+  catWrap.style.top  = catY+'px';
+  setFace('idle');
+  setAnim('idle');
+  setTimeout(moveCat, 1000);
+  setInterval(()=>{ if(!state.busy) moveCat(); }, 2800 + Math.random()*1500);
 }
 
-// ── CLICK ─────────────────────────────────────────────
-wrap.addEventListener('click',e=>{
+// ── CLICK CAT ─────────────────────────────────────────
+catWrap.addEventListener('click', e=>{
   e.stopPropagation();
-  if(state.busy)return;
-  if(Math.random()<.2){ doFluff(); return; }
-  const b=['nya~','♡','purr...','mew!','(=^ω^=)','zzz~','ฅ•ω•ฅ'];
-  showThought(b[Math.floor(Math.random()*b.length)]);
-  setEyes('happy'); showBlush(true);
-  setCatState('purr');
+  if(state.busy) return;
+
+  if(Math.random() < 0.20){
+    doFluff(); return;
+  }
+  // affectionate
+  const thoughts=['nya~','♡','purr...','mew!','zzz~','(=^ω^=)'];
+  showThought(rnd(thoughts));
+  setFace('pet');
+  setAnim('purr');
+  showBlush();
   changeStat('happy',5);
   addDiary('小夜被摸了摸，咕噜咕噜地叫起来 🐾');
-  setTimeout(()=>{setEyes('normal');showBlush(false);setCatState('idle');},1300);
+  state.busy=true;
+  setTimeout(()=>{ setFace('idle'); setAnim('idle'); hideBlush(); state.busy=false; }, 1300);
 });
 
 function doFluff(){
   state.busy=true;
-  setEyes('scared');
-  setCatState('fluff');
-  showThought('!!!(ΦДΦ)!!!');
+  setFace('fluff');
+  setAnim('fluff');
+  showThought('!!(ΦДΦ)!!');
   addDiary('小夜突然炸毛啦！蓬蓬地跑开了 💨');
-  document.getElementById('mood-msg').textContent='小夜炸毛啦！！(ΦДΦ)';
+  moodMsg.textContent='小夜炸毛啦！！(ΦДΦ)';
   setTimeout(()=>{
-    setEyes('normal');
     moveCat();
     state.busy=false;
     hideThought();
-    document.getElementById('mood-msg').textContent='小夜冷静下来了...';
-  },950);
+    moodMsg.textContent='小夜冷静下来了...';
+  },900);
 }
 
-// ── THOUGHT ──────────────────────────────────────────
-const thoughtEl=document.getElementById('thought-bubble');
+// ── BLUSH (CSS class trick) ────────────────────────────
+function showBlush(){
+  catFace.style.textShadow='0 0 8px rgba(249,168,200,.9), 2px 2px 0 rgba(249,168,200,.5)';
+}
+function hideBlush(){
+  catFace.style.textShadow='';
+}
+
+// ── THOUGHT ───────────────────────────────────────────
 let tTimer;
-function showThought(t){thoughtEl.textContent=t;thoughtEl.classList.add('show');clearTimeout(tTimer);tTimer=setTimeout(hideThought,2200);}
-function hideThought(){thoughtEl.classList.remove('show');}
+function showThought(t){ thoughtEl.textContent=t; thoughtEl.classList.add('show'); clearTimeout(tTimer); tTimer=setTimeout(hideThought,2200); }
+function hideThought(){ thoughtEl.classList.remove('show'); }
 
 // ── ACTIONS ───────────────────────────────────────────
 const MSGS={
-  pet:['小夜咕噜咕噜地叫起来 ♡','哇！好舒服～（蹭蹭）','小夜的尾巴翘得高高的~'],
-  feed:['小夜把食物吃得干干净净！','喵～好好吃！最爱吃鱼了！','小夜吃饱了，打了个小嗝~'],
-  play:['小夜扑向了小毛球！','小夜追着蝴蝶结跑来跑去！','哇！好好玩！（蹦蹦跳跳）'],
-  bath:['小夜洗完澡，现在香喷喷的！','哼哼～（勉强接受了洗澡）','洗完澡小夜毛发亮亮的~'],
+  pet:  ['小夜咕噜咕噜地叫起来 ♡','哇！好舒服～（蹭蹭）','小夜的尾巴翘得高高的~'],
+  feed: ['小夜把食物吃得干干净净！','喵～好好吃！最爱吃鱼了！','小夜吃饱了，打了个小嗝~'],
+  play: ['小夜扑向了小毛球！','小夜追着蝴蝶结跑来跑去！','哇！好好玩！（蹦蹦跳跳）'],
+  bath: ['小夜洗完澡，现在香喷喷的！','哼哼～（勉强接受了洗澡）','洗完澡小夜毛发亮亮的~'],
 };
 const EMOJIS={pet:'💗',feed:'🍣',play:'🎀',bath:'🫧'};
 const DELTA={
-  pet:{happy:+12,energy:-2},
-  feed:{hungry:+20,happy:+5,energy:+8},
-  play:{happy:+15,energy:-10,hungry:-8},
-  bath:{clean:+25,happy:+5},
+  pet:  {happy:+12,energy:-2},
+  feed: {hungry:+20,happy:+5,energy:+8},
+  play: {happy:+15,energy:-10,hungry:-8},
+  bath: {clean:+25,happy:+5},
 };
 
 function doAction(action){
-  if(state.busy)return;
+  if(state.busy) return;
   state.busy=true;
   spawnEmoji(EMOJIS[action]);
-  const msg=MSGS[action][Math.floor(Math.random()*MSGS[action].length)];
-  document.getElementById('mood-msg').textContent=msg;
+  const msg=rnd(MSGS[action]);
+  moodMsg.textContent=msg;
   addDiary(msg);
-  for(const[k,v]of Object.entries(DELTA[action]||{}))changeStat(k,v);
-  setEyes('happy'); showBlush(true);
-  setCatState('purr');
-  showThought(EMOJIS[action]);
+  for(const[k,v]of Object.entries(DELTA[action]||{})) changeStat(k,v);
+
+  if(action==='bath'){
+    setFace('bath'); setAnim('fluff');
+    showThought('ﾔﾀﾞ(=；ω；=)');
+  } else {
+    setFace(action); setAnim(action==='play'?'walk':'purr');
+    showThought(EMOJIS[action]);
+    if(action==='pet'||action==='feed') showBlush();
+  }
   setTimeout(()=>{
-    setEyes('normal');showBlush(false);setCatState('idle');
+    setFace('idle'); setAnim('idle'); hideBlush();
     state.busy=false;
-    document.getElementById('mood-msg').textContent='小夜心情很好～';
+    moodMsg.textContent='小夜心情很好～';
   },1400);
 }
 
+// ── STATS ─────────────────────────────────────────────
 function changeStat(k,d){
   state[k]=Math.max(0,Math.min(100,(state[k]||0)+d));
   const el=document.getElementById('bar-'+k);
-  if(el)el.style.width=state[k]+'%';
+  if(el) el.style.width=state[k]+'%';
 }
 
+// ── EMOJI POPUP ───────────────────────────────────────
 function spawnEmoji(e){
   const el=document.createElement('div');
-  el.className='popup-effect';el.textContent=e;
-  const r=wrap.getBoundingClientRect();
-  el.style.left=(r.left+r.width/2-16)+'px';
+  el.className='popup-effect'; el.textContent=e;
+  const r=catWrap.getBoundingClientRect();
+  el.style.left=(r.left+r.width/2-18)+'px';
   el.style.top=(r.top-8)+'px';
   document.body.appendChild(el);
-  setTimeout(()=>el.remove(),1200);
+  setTimeout(()=>el.remove(),1100);
 }
 
+// ── DIARY ─────────────────────────────────────────────
 const diaryList=document.getElementById('diary-list');
 let dCount=0;
 function addDiary(text){
@@ -404,14 +367,20 @@ function addDiary(text){
   li.className='diary-entry';
   li.innerHTML=`<span class="diary-time">${ts}</span><span>${text}</span>`;
   diaryList.prepend(li);
-  if(++dCount>20)diaryList.lastChild?.remove();
+  if(++dCount>20) diaryList.lastChild?.remove();
 }
 
+// ── DECAY ─────────────────────────────────────────────
 setInterval(()=>{
-  changeStat('hungry',-2);changeStat('happy',-1);
-  changeStat('energy',-1);if(state.clean>5)changeStat('clean',-1);
+  changeStat('hungry',-2); changeStat('happy',-1);
+  changeStat('energy',-1); if(state.clean>5) changeStat('clean',-1);
+  // if hungry, cat shows it
+  if(state.hungry<20 && !state.busy){
+    setFace('feed'); showThought('...(´•ω•`)饿了'); 
+  }
 },10000);
 
+// ── INIT ──────────────────────────────────────────────
 window.addEventListener('load',()=>{
   init();
   addDiary('小夜出生啦！好奇地看着这个世界 🌟');
